@@ -3,12 +3,10 @@
 @section('content')
     <div class="container">
         <div class="card mb-3">
-            <h5 class="card-header">{{ $subscriber->name }} {{ $subscriber->surname }}</h5>
+            <h5 class="card-header">
+                {{ $subscriber->full_name }} ({{ $subscriber->readable_sex }}, {{ $subscriber->age }})
+            </h5>
             <div class="card-body subscriber-info">
-                <h5>Пол</h5>
-                <p>{{ $subscriber->sex }}</p>
-                <h5>Возраст</h5>
-                <p>{{ $subscriber->age }}</p>
                 <h5>Диагноз</h5>
                 <p>{{ $subscriber->diagnosis ?? 'Не указан' }}</p>
                 <h5>Описываемое лекарство</h5>

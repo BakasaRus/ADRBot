@@ -27,14 +27,40 @@ class Subscriber extends Model
         $this->sex = $info['sex'];
         $bdate = $info['bdate'];
         if (isset($bdate) && Carbon::hasFormat($bdate, 'j.n.Y')) {
-            \Log::debug($bdate);
-            \Log::debug(Carbon::createFromFormat('j.n.Y', $bdate));
-            $this->age = Carbon::now()->diffInYears(Carbon::createFromFormat('j.n.Y', $bdate));
+            $bdate = Carbon::createFromFormat('j.n.Y', $bdate);
+            $this->age = Carbon::now()->diffInYears($bdate);
         } else {
-            \Log::debug($bdate);
             $this->age = 0;
         }
         $this->save();
         return $this;
+    }
+
+    public function getFullNameAttribute()
+    {
+        return "{$this->attributes['name']} {$this->attributes['surname']}";
+    }
+
+    public function getReadableSexAttribute()
+    {
+        switch ($this->attributes['sex']) {
+            case 1:
+                return 'женский';
+            case 2:
+                return 'мужской';
+            default:
+                return 'не указан';
+        }
+    }
+
+    public function setReadableSexAttribute($value)
+    {
+        if ($value == 'мужской' || $value == 'муж' || $value == 'мужчина') {
+            $this->attributes['sex'] = 2;
+        } else if ($value == 'женский' || $value == 'жен' || $value == 'женщина') {
+            $this->attributes['sex'] = 1;
+        } else {
+            $this->attributes['sex'] = 0;
+        }
     }
 }

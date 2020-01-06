@@ -36,13 +36,13 @@ class BotService
             'Вы уже прошли участие в опросе, спасибо! К сожалению, мы принимаем только одну анкету с одного аккаунта ВКонтакте.'
         ],
         'confirm_sex' => [
-            'Мы получили из Вашего аккаунта ВКонтакте информацию о том, что Ваш пол -- %s. Это так?'
+            'Мы получили из Вашего аккаунта ВКонтакте информацию, что Ваш пол -- %s. Это так?'
         ],
         'ask_sex' => [
             'Уточните, пожалуйста, Ваш пол. Отправьте одно слово, "мужской" или "женский".'
         ],
         'confirm_age' => [
-            'Мы получили из Вашего аккаунта ВКонтакте информацию о том, что Вам %s. Всё верно?'
+            'Из Вашего же аккаунта ВКонтакте мы узнали, что Вам %s. Всё верно?'
         ],
         'ask_age' => [
             'Уточните, пожалуйста, Ваш возраст. Отправьте полное число лет, например, "21".'
@@ -266,7 +266,7 @@ class BotService
                 break;
             case 'confirm_sex':
                 $new_state = 'confirm_sex';
-                $reply = $this->genMessage('confirm_sex', [$subscriber->sex]);
+                $reply = $this->genMessage('confirm_sex', [$subscriber->readable_sex]);
                 $keyboard = $this->keyboards['yes_no'];
                 break;
             case 'ask_sex':
@@ -276,7 +276,7 @@ class BotService
                 break;
             case 'confirm_age':
                 if ($state == 'ask_sex') {
-                    $subscriber->sex = mb_strtolower($text) == 'мужской' ? 2 : 1;
+                    $subscriber->readable_sex = mb_strtolower($text);
                 }
                 $new_state = 'confirm_age';
                 $reply = $this->genMessage('confirm_age', [$subscriber->age]);
@@ -284,12 +284,7 @@ class BotService
                 break;
             case 'ask_age':
                 if ($state == 'ask_sex') {
-                    $sex = mb_strtolower($text);
-                    if ($sex == 'мужской' || $sex == 'муж' || $sex == 'мужчина') {
-                        $subscriber->sex = 2;
-                    } else {
-                        $subscriber->sex = 1;
-                    }
+                    $subscriber->readable_sex = mb_strtolower($text);
                 }
                 $new_state = 'ask_age';
                 $reply = $this->genMessage('ask_age');

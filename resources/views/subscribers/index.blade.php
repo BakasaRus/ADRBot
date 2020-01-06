@@ -7,7 +7,10 @@
             <table class="table mb-0">
                 <thead>
                     <tr>
-                        <th scope="col">ID</th>
+                        <th scope="col">VK ID</th>
+                        <th scope="col">
+                            <abbr title="Мы не запрашиваем ФИО у пользователя, а берём его из профиля ВКонтакте">ФИО</abbr>
+                        </th>
                         <th scope="col">Пол</th>
                         <th scope="col">Возраст</th>
                         <th scope="col">Количество сообщений</th>
@@ -18,11 +21,16 @@
                 @foreach($subscribers as $subscriber)
                     <tr>
                         <th scope="row">
-                            <a href="{{ route('subscribers.show', ['subscriber' => $subscriber->id]) }}">
-                                {{ $subscriber->name }} {{ $subscriber->surname }}
+                            <a href="https://vk.com/id{{ $subscriber->id }}" target="_blank">
+                                {{ $subscriber->id }}
                             </a>
                         </th>
-                        <td>{{ $subscriber->sex }}</td>
+                        <th scope="row">
+                            <a href="{{ route('subscribers.show', ['subscriber' => $subscriber->id]) }}">
+                                {{ $subscriber->full_name }}
+                            </a>
+                        </th>
+                        <td>{{ $subscriber->readable_sex }}</td>
                         <td>{{ $subscriber->age ?? '¯\_(ツ)_/¯' }}</td>
                         <td>{{ $subscriber->messages_count }}</td>
                         <td>¯\_(ツ)_/¯</td>
