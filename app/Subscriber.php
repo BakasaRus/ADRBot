@@ -46,10 +46,13 @@ class Subscriber extends Model
         switch ($this->attributes['sex']) {
             case 1:
                 return 'женский';
+                break;
             case 2:
                 return 'мужской';
+                break;
             default:
                 return 'не указан';
+                break;
         }
     }
 
