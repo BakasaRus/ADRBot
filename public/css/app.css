@@ -8858,6 +8858,7 @@ button.bg-dark:focus {
 }
 
 .mb-0,
+.subscriber-info > p:last-child,
 .my-0 {
   margin-bottom: 0 !important;
 }
@@ -11354,5 +11355,9 @@ a.text-dark:focus {
     color: inherit;
     border-color: #dee2e6;
   }
+}
+
+.subscriber-info > p {
+  white-space: pre-line;
 }
 

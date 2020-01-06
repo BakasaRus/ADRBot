@@ -6,3 +6,10 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+.subscriber-info>p {
+    white-space: pre-line;
+    &:last-child {
+        @extend .mb-0;
+    }
+}

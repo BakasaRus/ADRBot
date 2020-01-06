@@ -15,11 +15,14 @@ class CreateSubscribersTable extends Migration
     {
         Schema::create('subscribers', function (Blueprint $table) {
             $table->unsignedBigInteger('id')->primary();
-            $table->string('name');
-            $table->string('surname');
-            $table->date('bdate')->nullable();
+            $table->unsignedInteger('age')->nullable();
             $table->enum('sex', [0, 1, 2])->default(0);
             $table->string('state')->default('hello');
+            $table->text('diagnosis')->nullable();
+            $table->text('adr_drug')->nullable();
+            $table->text('other_drugs')->nullable();
+            $table->text('adr')->nullable();
+            $table->text('risks')->nullable();
             $table->timestamps();
         });
     }

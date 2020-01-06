@@ -20,3 +20,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('/bot', 'BotController')->name('bot');
+
+Route::resource('/subscribers', 'SubscriberController')
+    ->only(['index', 'show', 'delete']);
