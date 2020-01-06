@@ -15,6 +15,7 @@
                         <th scope="col">Возраст</th>
                         <th scope="col">Количество сообщений</th>
                         <th scope="col">Дата последнего сообщения</th>
+                        <th scope="col">Действия</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,6 +35,13 @@
                         <td>{{ $subscriber->age ?? '¯\_(ツ)_/¯' }}</td>
                         <td>{{ $subscriber->messages_count }}</td>
                         <td>¯\_(ツ)_/¯</td>
+                        <td>
+                            <a type="button" class="btn btn-sm btn-danger" href="{{ route('subscribers.show', ['subscriber' => $subscriber->id]) }}" data-toggle="tooltip" title="Удалить со всеми сообщениями" onclick="event.preventDefault(); document.getElementById('del_{{ $subscriber->id }}').submit();">Удалить</a>
+                            <form method="POST" action="{{ route('subscribers.show', ['subscriber' => $subscriber->id]) }}" id="del_{{ $subscriber->id }}"  style="display: none;">
+                                {{ csrf_field() }}
+                                {{ method_field('DELETE') }}
+                            </form>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>
