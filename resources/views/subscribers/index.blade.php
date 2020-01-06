@@ -19,7 +19,7 @@
                     <tr>
                         <th scope="row">
                             <a href="{{ route('subscribers.show', ['subscriber' => $subscriber->id]) }}">
-                                {{ $subscriber->id }}
+                                {{ $subscriber->name }} {{ $subscriber->surname }}
                             </a>
                         </th>
                         <td>{{ $subscriber->sex }}</td>
