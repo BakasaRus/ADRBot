@@ -30,4 +30,10 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'vk' => [
+        'group_id' => env('VK_GROUP_ID'),
+        'group_confirmation' => env('VK_GROUP_CONFIRMATION'),
+        'group_token' => env('VK_GROUP_ACCESS_TOKEN')
+    ]
+
 ];
