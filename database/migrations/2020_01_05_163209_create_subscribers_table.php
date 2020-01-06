@@ -17,7 +17,8 @@ class CreateSubscribersTable extends Migration
             $table->unsignedBigInteger('id')->primary();
             $table->unsignedInteger('age')->nullable();
             $table->enum('sex', [0, 1, 2])->default(0);
-            $table->string('state')->default('hello');
+            $table->boolean('agreed')->default(0);
+            $table->string('state')->nullable();
             $table->text('diagnosis')->nullable();
             $table->text('adr_drug')->nullable();
             $table->text('other_drugs')->nullable();
