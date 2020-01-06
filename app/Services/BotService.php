@@ -343,6 +343,8 @@ class BotService
                 $reply = 'Я чёт не совсем понимаю Вас :-(';
                 break;
         }
+        $subscriber->state = $new_state;
+        $subscriber->save();
         $subscriber->messages()->createMany([
             [
                 'text' => $text,
@@ -353,8 +355,6 @@ class BotService
                 'from' => 0
             ]
         ]);
-        $subscriber->state = $new_state;
-        $subscriber->save();
         $this->client->request('messages.send', [
             'peer_id' => $data['from_id'],
             'message' => $reply,

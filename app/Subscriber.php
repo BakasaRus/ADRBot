@@ -22,17 +22,16 @@ class Subscriber extends Model
 
     public function setInfoFromVk($info)
     {
-        $this->name = $info['first_name'];
-        $this->surname = $info['last_name'];
-        $this->sex = $info['sex'];
+        $this->attributes['name'] = $info['first_name'];
+        $this->attributes['surname'] = $info['last_name'];
+        $this->attributes['sex'] = $info['sex'];
         $bdate = $info['bdate'];
         if (isset($bdate) && Carbon::hasFormat($bdate, 'j.n.Y')) {
             $bdate = Carbon::createFromFormat('j.n.Y', $bdate);
-            $this->age = Carbon::now()->diffInYears($bdate);
+            $this->attributes['age'] = Carbon::now()->diffInYears($bdate);
         } else {
-            $this->age = 0;
+            $this->attributes['age'] = 0;
         }
-        $this->save();
         return $this;
     }
 
