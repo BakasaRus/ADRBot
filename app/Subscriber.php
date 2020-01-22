@@ -25,7 +25,7 @@ class Subscriber extends Model
         $this->attributes['name'] = $info['first_name'];
         $this->attributes['surname'] = $info['last_name'];
         $this->attributes['sex'] = $info['sex'];
-        $bdate = $info['bdate'];
+        $bdate = array_key_exists('bdate', $info) ? $info['bdate'] : '';
         if (isset($bdate) && Carbon::hasFormat($bdate, 'j.n.Y')) {
             $bdate = Carbon::createFromFormat('j.n.Y', $bdate);
             $this->attributes['age'] = Carbon::now()->diffInYears($bdate);
