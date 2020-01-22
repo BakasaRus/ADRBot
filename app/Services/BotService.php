@@ -179,7 +179,7 @@ class BotService
         switch ($state) {
             case 'hello':
             case 'change_mind':
-                if ($text == 'далее' || $text == 'да') {
+                if ($text == 'далее' || $text == 'да' || $text == 'продолжить') {
                     $action = $subscriber->sex == 0 ? 'ask_sex' : 'confirm_sex';
                 } else {
                     $action = 'rejected';
