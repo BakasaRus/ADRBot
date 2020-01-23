@@ -16,8 +16,8 @@ class SubscriberController extends Controller
     public function index()
     {
         $subscribers = Subscriber::withCount('messages')
-            ->orderBy('last_message_at', 'desc')
-            ->get();
+            ->get()
+            ->sortByDesc('last_message_at');
         return view('subscribers.index') ->with('subscribers', $subscribers);
     }
 
