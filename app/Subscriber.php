@@ -12,6 +12,8 @@ class Subscriber extends Model
         'id', 'name', 'surname', 'bdate', 'sex'
     ];
 
+    protected $appends = ['last_message_at'];
+
     /**
      * @return HasMany
      */
@@ -64,5 +66,10 @@ class Subscriber extends Model
         } else {
             $this->attributes['sex'] = 0;
         }
+    }
+
+    public function getLastMessageAtAttribute()
+    {
+        return $this->messages->last()->created_at;
     }
 }
