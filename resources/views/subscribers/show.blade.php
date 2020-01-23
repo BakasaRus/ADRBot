@@ -34,7 +34,7 @@
                     <tr>
                         <th scope="row">{{ $message->from ? 'Пользователь' : 'Бот' }}</th>
                         <td style="white-space: pre-line">{{ $message->text }}</td>
-                        <td>{{ $message->created_at }}</td>
+                        <td class="text-nowrap">{{ $message->created_at->locale('ru_RU')->isoFormat('LLL') }}</td>
                     </tr>
                 @endforeach
                 </tbody>
