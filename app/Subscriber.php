@@ -70,7 +70,6 @@ class Subscriber extends Model
 
     public function getLastMessageAtAttribute()
     {
-        $ts = Carbon::createFromFormat('Y-m-d H:i:s', $this->messages->last()->created_at)->locale('ru_RU');
-        return $ts->isoFormat('LLL');
+        return Carbon::createFromFormat('Y-m-d H:i:s', $this->messages->last()->created_at)->locale('ru_RU');
     }
 }

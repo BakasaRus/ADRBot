@@ -40,7 +40,7 @@
                             <td class="align-middle">{{ $subscriber->age ?? '¯\_(ツ)_/¯' }}</td>
                             <td class="align-middle">{{ $subscriber->adr_drug ?? '¯\_(ツ)_/¯' }}</td>
                             <td class="align-middle">{{ $subscriber->messages_count }}</td>
-                            <td class="text-nowrap align-middle">{{ $subscriber->last_message_at }}</td>
+                            <td class="text-nowrap align-middle">{{ $subscriber->last_message_at->isoFormat('LLL') }}</td>
                             <td class="align-middle">
                                 <a type="button" class="btn btn-sm btn-danger" href="{{ route('subscribers.show', ['subscriber' => $subscriber->id]) }}" data-toggle="tooltip" title="Удалить со всеми сообщениями" onclick="event.preventDefault(); document.getElementById('del_{{ $subscriber->id }}').submit();">Удалить</a>
                                 <form method="POST" action="{{ route('subscribers.show', ['subscriber' => $subscriber->id]) }}" id="del_{{ $subscriber->id }}"  style="display: none;">
