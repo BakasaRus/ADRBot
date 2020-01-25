@@ -68,10 +68,13 @@ class BotService
             'Расскажите в свободной форме про появившиеся у вас нежелательные эффекты. Чем подробнее описание, тем лучше.'
         ],
         'ask_risks' => [
-            'Делали ли Вы что-либо, что не рекомендуется при принятии препарата (например, принимали алкоголь)?'
+            'Делали ли Вы что-либо, что не рекомендуется при принятии препарата (например, принимали алкоголь)? Если да, об расскажите подробнее.'
         ],
         'dummy' => [
             'Мы Вас, к сожалению, не совсем поняли. Попробуйте написать то, что хотели, чуть иначе ;-)'
+        ],
+        'no_text' => [
+            'Мы умеем распознавать только текст ¯\_(ツ)_/¯ Попробуйте, пожалуйста, выразить свою мысль иначе.'
         ]
     ];
 
@@ -175,6 +178,10 @@ class BotService
 
         if (is_null($state)) {
             return 'hello';
+        }
+
+        if ($text == '') {
+            return 'no_text';
         }
 
         $text = mb_strtolower($text);
@@ -343,16 +350,19 @@ class BotService
                 $reply = $this->genMessage('change_mind');
                 $keyboard = $this->keyboards['agree'];
                 break;
+            case 'no_text':
+                $reply = $this->genMessage('no_text');
+                break;
             case 'dummy':
             default:
-                $reply = 'Я чёт не совсем понимаю Вас :-(';
+                $reply = $this->genMessage('dummy');
                 break;
         }
         $subscriber->state = $new_state;
         $subscriber->save();
         $subscriber->messages()->createMany([
             [
-                'text' => $text,
+                'text' => $text ?? 'Вложения: ' . $data['attachments'],
                 'from' => 1
             ],
             [
