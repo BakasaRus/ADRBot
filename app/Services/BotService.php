@@ -362,7 +362,7 @@ class BotService
         $subscriber->save();
         $subscriber->messages()->createMany([
             [
-                'text' => $text ?? 'Вложения: ' . $data['attachments'],
+                'text' => $text ?? 'Вложения: ' . json_encode($data['attachments']),
                 'from' => 1
             ],
             [
